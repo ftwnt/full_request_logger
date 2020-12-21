@@ -5,9 +5,9 @@ class FullRequestLogger::Processor
     @request = request
   end
 
-  def process
+  def process(logged_data = nil)
     if enabled? && eligible_for_storage?
-      recorder.store request_id
+      recorder.store(request_id, logged_data)
     else
       recorder.clear
     end

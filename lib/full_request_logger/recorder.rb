@@ -24,8 +24,8 @@ class FullRequestLogger::Recorder
   end
 
   # Store all log messages as a single string to the full request logging storage accessible under the +request_id+.
-  def store(request_id)
-    if (log_to_be_stored = combined_log).present?
+  def store(request_id, log_to_be_stored = nil)
+    if (log_to_be_stored ||= combined_log).present?
       redis.setex \
         request_key(request_id),
         FullRequestLogger.ttl,
